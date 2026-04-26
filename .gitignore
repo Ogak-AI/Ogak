@@ -1,0 +1,26 @@
+# Secrets
+.env
+
+# Privacy — NDPR opt-out store (contains hashed phone numbers)
+optout.json
+seen_users.json
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local data
+ogak_chroma_db/
+telemetry.jsonl
+*.jsonl
+
+# Virtual envs
+.venv/
+venv/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
