@@ -1,4 +1,16 @@
+---
+title: Ogak SMS AI
+emoji: 🤖
+colorFrom: green
+colorTo: gray
+sdk: docker
+pinned: false
+license: mit
+app_port: 7860
+---
+
 # Ogak — Nigeria's Free SMS AI Assistant
+
 
 > **Text any question to shortcode 55555. Get a witty, truthful answer instantly. No data, no app, no charge to the user.**
 
