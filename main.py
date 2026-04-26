@@ -78,12 +78,18 @@ SUPABASE_KEY        = os.getenv("SUPABASE_KEY", "")           # optional
 MAX_SMS_CHARS       = 140   # strict GSM-7 single segment
 MAX_RETRIM_ATTEMPTS = 3     # how many times to re-prompt for shorter reply
 
-# mem0 config — uses local in-memory store by default; connect Redis/Supabase for production
+# mem0 config — uses local ChromaDB + HuggingFace sentence-transformers (no OpenAI needed)
 MEM0_CONFIG = {
+    "embedder": {
+        "provider": "huggingface",          # free, local — no OpenAI API key needed
+        "config": {
+            "model": "multi-qa-MiniLM-L6-cos-v1"  # lightweight 80MB model, fast on CPU
+        },
+    },
     "vector_store": {
         "provider": "chroma",               # zero-cost local vector store
         "config": {"collection_name": "ogak_memory", "path": "./ogak_chroma_db"},
-    }
+    },
 }
 # To use Redis instead, replace with:
 # MEM0_CONFIG = {
@@ -644,6 +650,12 @@ async def webhook(request: Request) -> Response:
         return JSONResponse({"status": "overloaded"}, status_code=503)
 
     return JSONResponse({"status": "queued"})
+
+
+@app.get("/")
+async def root() -> dict:
+    """Root endpoint — HuggingFace Spaces health probe."""
+    return {"service": "Ogak SMS AI", "status": "alive", "docs": "/docs"}
 
 
 @app.get("/health")

@@ -7,5 +7,4 @@ opentelemetry-api==1.26.0
 opentelemetry-sdk==1.26.0
 python-dotenv==1.0.1
 chromadb==0.5.15
-# python-dotenv: loads .env automatically — add to startup if needed:
-#   from dotenv import load_dotenv; load_dotenv()
+sentence-transformers==3.0.1   # free local embeddings for mem0 (no OpenAI needed)
